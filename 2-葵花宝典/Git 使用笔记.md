@@ -17,13 +17,7 @@ git merge <branch-name>  # 把 <branch-name> 分支合并到当前分支
 # 第二种合并方式
 git rebase 
 
-
 ```
-
-
-### git rebase 
-
-用法一：合并多次提交记录
 
 
 ### 团队提交流程
