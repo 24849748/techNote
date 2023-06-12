@@ -157,6 +157,24 @@ ssh -T git@github.com
 ssh -T git@gitlab.com
 ```
 
+
+### 概念性理解
+
+#### 工作区域
+* 工作区
+* 暂存区
+* 本地仓库
+* 远程仓库
+
+#### 文件状态
+* 未跟踪（untrack）
+* 未修改（unmodified）
+* 已修改（modified）
+* 已暂存（staged）
+![image.png|510](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202306121639294.png)
+
+
+
 ### GIT命令
 
 ```shell
