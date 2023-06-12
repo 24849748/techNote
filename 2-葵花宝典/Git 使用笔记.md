@@ -1,25 +1,6 @@
 * git仓库中保存记录就是快照
 * branch前面带 `*` 号为当前分支
 
-```shell
-git add
-git commit
-
-git branch # 列出本地所有分支
-git branch -a # 列出本地和远程所有分支
-git branch <branch-name> # 新建 <branch-name> 分支，但不切换
-
-git checkout <branch-name> # 切换到 <branch-name> 分支
-git checkout -b <branch-name> # 新建并切换到 <branch-name> 分支
-
-git merge <branch-name>  # 把 <branch-name> 分支合并到当前分支
-
-# 第二种合并方式
-git rebase 
-
-```
-
-
 ### 团队提交流程
 
 1. 写代码前先 `git pull` 拉取更新，如果你本地有文件没有 `commit` 要 `commit` 一下
@@ -32,7 +13,7 @@ git rebase
 
 #### 常见冲突
 * 本地和远程对同一段代码作了修改，git不知道要使用哪一个
-* 
+* 一边删除了一个文件，另一边修改了这个文件
 
 
 ### GIT 本地和远程仓库都有改动
@@ -43,10 +24,6 @@ git rebase
 做法1：
 1. 首先需要将本地分支改动commit到暂存区去
 2. 然后使用 `pull` 同步远程仓库的改动，如果有冲突需要手动修改
-
-
-
-
 
 
 ### GIT同步远程仓库
@@ -107,13 +84,12 @@ git push 命令，会在远程仓库创建和branch名字一样的分支
 git push origin branch
 ```
 加上-u，会把该分支设置为上游分支，设置了上游分支后，后面push不需要再指定origin和本地branch
-可以适用一下命令手动设置上游分支，但个人不推荐直接`git push` 或 `git pull`
+可以使用以下命令手动设置上游分支
 ```shell
 git branch --set-upstream-to=<remote_name>/<remote_branch>
 # 或者
 git branch -u <remote_name>/<remote_branch>
 ```
-
 
 
 ### Git回滚历史版本
@@ -140,6 +116,10 @@ git reset --hard 05ac0bfb2929d9cbwiener75e52ecb011950fb
 git push origin HEAD --force
 ```
 
+git reset 三个参数：
+* --soft：
+* --hard：
+* --mixed：
 
 ### 为Github和Gitlab添加ssh公钥
 
@@ -176,3 +156,55 @@ IdentityFile ~/.ssh/github_rsa
 ssh -T git@github.com
 ssh -T git@gitlab.com
 ```
+
+### GIT命令
+
+```shell
+git add
+git commit
+
+git branch # 列出本地所有分支
+git branch -a # 列出本地和远程所有分支
+git branch <branch-name> # 新建 <branch-name> 分支，但不切换
+
+git checkout <branch-name> # 切换到 <branch-name> 分支
+git checkout -b <branch-name> # 新建并切换到 <branch-name> 分支
+git branch -f master HEAD~3 # 让master分支强制指向HEAD节点的上上上次提交记录
+
+git merge <branch-name>  # 把 <branch-name> 分支合并到当前分支
+git rebase <target-branch-name> # 将当前分支提交记录，一个一个取出，合并到目标分支上去
+```
+
+切换当前节点
+```shell
+git checkout <hash> # 幸好git处理hash比较人性，只需要输入前几个字符就好
+
+git checkout HEAD^  # 切换到HEAD节点上个提交记录
+git checkout HEAD^^^ # 切换到HEAD节点上上上个提交记录
+
+git checkout HEAD~4  # 切换到HEAD节点前4个提交记录
+```
+
+撤销变更
+```shell
+git reset <hash> # 撤销更改，但对远程分支无效
+
+git revert # 在当前HEAD后面创建一个与HEAD^相同的节
+```
+
+
+整理提交记录
+```shell
+git cherry-pick <hash>  # 将对应commit hash复制一份到当前分支节点后面，支持多个<hash>
+
+git rebase -i HEAD~4 # 用vi以文本形式整理HEAD往前4个分支提交记录
+```
+
+Tag
+```shell
+git tag <tag-name> <commitHash> # 在 <commitHash> 提交记录上添加标签 <tag-name>，不指定 <commitHash> 默认为HEAD节点
+
+git checkout <tag-name> #快速切换到相应位置
+```
+
+
