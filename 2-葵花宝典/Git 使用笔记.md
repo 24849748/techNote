@@ -1,6 +1,32 @@
 * git仓库中保存记录就是快照
 * branch前面带 `*` 号为当前分支
 
+### 下载远程指定分支
+clone：
+```shell
+git clone -b <branch-name> <url>
+```
+
+pull：
+```shell
+git pull origin <远程分支名>:<本地分支名> # 拉取远程指定分支到本地指定分支
+git pull origin <远程分支名> # 拉取远程指定分支到本地当前分支
+
+# git push 一样
+```
+
+### GIT解决换行符LF CRLF warning
+眼不见为净
+```shell
+# 查看core.autocrlf属性
+git config --global --get core.autocrlf
+git config --get core.autocrlf
+
+# 设置为true
+git config --global core.autocrlf true
+git config core.autocrlf true
+```
+
 ### 团队提交流程
 
 1. 写代码前先 `git pull` 拉取更新，如果你本地有文件没有 `commit` 要 `commit` 一下
@@ -14,7 +40,15 @@
 #### 常见冲突
 * 本地和远程对同一段代码作了修改，git不知道要使用哪一个
 * 一边删除了一个文件，另一边修改了这个文件
-123123
+
+
+#### 我们的开发模型：
+-   master分支为编译可用版本，dev分支为开发分支
+-   每个人拉取仓库后，自己在本地仓库新建一个自己的dev_yourname分支
+    -   dev_yourname分支保持与dev分支同步
+    -   完成一个阶段后，小组讨论后将dev_yourname分支合并到dev分支，并将dev分支push到远程仓库
+-   根据自己分配的任务在本地dev_yourname分支的基础上创建一个功能分支，比如feat#433分支，写完功能分支后，rebase到dev_yourname分支上
+
 
 ### GIT 本地和远程仓库都有改动
 
