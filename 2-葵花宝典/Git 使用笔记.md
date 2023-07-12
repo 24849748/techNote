@@ -1,5 +1,62 @@
 * git仓库中保存记录就是快照
 * branch前面带 `*` 号为当前分支
+* .gitignore对路径符号有严格要求。必须用 `/`
+
+### git rm
+删除已git add的某个文件，使用gitignore没有起作用
+适用场景：
+1. 之前错误push了某个项目配置文件，后面pull下来后一直有冲突
+2. 打算远程和本地都删除改文件
+
+```shell
+git rm -r -n --cached <file/dir> # 查看文件或目录是否在本地或远程
+
+git rm -r --cached <file/dir> # 删除
+
+```
+
+
+### git stash
+
+git push前如果有代码没有提交，会被打断的
+我们可以使用stash来保存当前的改动，然后再push或pull，操作完后再把改动恢复回来
+
+适用场景：
+1. 写完部分代码，但有部分代码还不想提交
+
+```shell
+git stash  # 放入暂存区
+git stash pop # 恢复之前暂存的改动
+```
+
+举例：
+* 功能开发一半，改了一个bug
+* bug比较重要需要先提交
+
+```shell
+git commit bug # commit bug
+git stash # 把其他内容暂存起来
+git pull --rebase # 以rebase方式拉取更新远程最新的代码
+git push # 上传commit的bug
+git stash pop # 恢复之前暂存内容
+```
+
+
+### 修改commit内容
+
+**修改最近一次**
+```shell
+git commit --amend # 然后进入vi编辑器
+```
+
+**修改之前**
+```shell
+git rebase -i HEAD~2 # 修改倒数两次commit记录
+#然后在vi界面将pick更改成edit，保存退出
+#然后终端会有git commit --amend
+#修改注释保存退出
+git rebase --continue
+```
 
 ### 下载远程指定分支
 clone：
@@ -151,9 +208,9 @@ git push origin HEAD --force
 ```
 
 git reset 三个参数：
-* --soft：
-* --hard：
-* --mixed：
+* --soft：只撤销 `git commit`，不撤销 `git add`，不删除工作空间代码改动
+* --hard：撤销 `git commit`、`git add`，删除工作空间代码改动，恢复到上一次 `git commit` 的状态
+* --mixed：撤销 `git commit`、 `git add`，不删除工作空间代码改动，reset默认参数
 
 ### 为Github和Gitlab添加ssh公钥
 
