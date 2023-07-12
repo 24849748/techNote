@@ -2,6 +2,35 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+### git pull 冲突举例
+
+背景：
+1. 我要把远程仓库的 `hao_dev` 分支拉到我本地的 `feat_register` 分支上
+2. 我当前在 `feat_register` 分支上
+
+```shell
+git pull origin hao_dev    # 拉取hao_dev分支到本地当前的分支
+```
+
+提示有冲突
+![image.png|560](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121648166.png)
+
+vscode里可以直接点击修改
+![image.png|360](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121650725.png)
+
+![image.png|650](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121653498.png)
+
+因为这两个文件是rtt工程的配置文件，比较奇葩需要用git管理，所以上传了，这里就用采用本地的修改，点击“采用当前更改”后，保存一下文件
+然后点击左侧**合并更改**里冲突文件的+号，git add修改后的冲突文件
+继续合并
+```shell
+git merge --continue
+```
+修改一下commit内容
+![image.png|470](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121715101.png)
+合并完成
+![image.png|510](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121716934.png)
+
 ### git rm
 删除已git add的某个文件，使用gitignore没有起作用
 适用场景：
@@ -12,7 +41,6 @@
 git rm -r -n --cached <file/dir> # 查看文件或目录是否在本地或远程
 
 git rm -r --cached <file/dir> # 删除
-
 ```
 
 
@@ -94,9 +122,11 @@ git config core.autocrlf true
     3. 有更新，有冲突 -> 提示 `merge failed` ，需要手动修改冲突
 4. `git push`
 
+
 #### 常见冲突
 * 本地和远程对同一段代码作了修改，git不知道要使用哪一个
 * 一边删除了一个文件，另一边修改了这个文件
+
 
 
 #### 我们的开发模型：
