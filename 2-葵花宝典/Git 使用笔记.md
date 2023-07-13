@@ -2,6 +2,65 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+### 记录一次push过程
+背景：
+* 开发到一个阶段，准备push到远程
+* 功能在本地一个分支 `feat_register` 上开发
+* 本地有一支dev分支，对应远程dev分支
+* 已经把需要push的内容 add commit了
+```shell
+git stash    # 如果本地还有其他内容不想上传，先暂存着
+git checkout dev    # 切换到dev分支
+git rebase feat_register    # 把最新更改合并到dev分支
+git pull origin dev    # 拉取一下远程更新，没有冲突
+git push origin dev    # 上传到远程dev分支
+git checkout feat_register    # 上传完，切换回原来的分支，继续开发
+git stash pop    # 恢复暂存的内容，继续开发
+```
+
+终端原始记录
+```shell
+❯❯ sas_host_rtts git:(feat_register)  11:38 git stash
+Saved working directory and index state WIP on feat_register: d527e0b [feat]commit内容
+❯❯ sas_host_rtts git:(feat_register) 11:38 git checkout dev
+Switched to branch 'dev'
+Your branch is up to date with 'origin/dev'.
+❯❯ sas_host_rtts git:(dev) 11:38 git rebase feat_register
+Successfully rebased and updated refs/heads/dev.
+❯❯ sas_host_rtts git:(dev) 11:39 git pull origin dev    
+From 121.43.179.105:ptw_hzwl_sas/hzwl_sas_host
+ * branch            dev        -> FETCH_HEAD
+Already up to date.
+❯❯ sas_host_rtts git:(dev) 11:39 git push origin dev
+Enumerating objects: 42, done.
+Counting objects: 100% (38/38), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (26/26), done.
+Writing objects: 100% (26/26), 6.55 KiB | 3.27 MiB/s, done.
+Total 26 (delta 17), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: To create a merge request for dev, visit:
+remote:   http://121.43.179.105:9001/ptw_hzwl_sas/hzwl_sas_host/-/merge_requests/new?merge_request%5Bsource_branch%5D=dev      
+remote:
+To 121.43.179.105:ptw_hzwl_sas/hzwl_sas_host.git
+   c4f7072..d527e0b  dev -> dev
+❯❯ sas_host_rtts git:(dev) 11:39 git checkout feat_register
+Switched to branch 'feat_register'
+❯❯ sas_host_rtts git:(feat_register) 11:40 git stash pop
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+        modified:   applications/main.c
+        modified:   applications/pt_sas.h
+        modified:   applications/register.c
+        modified:   applications/warn.c
+        modified:   applications/warn.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (63ae916b87bea6078bee795e08d50b71d5c5efaa)
+```
+
+
 ### git pull 冲突举例
 
 背景：
