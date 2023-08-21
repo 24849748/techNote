@@ -2,6 +2,34 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+### git mv移动文件位置但不丢失git记录
+背景：
+* 需要移动某个文件或文件夹
+* git单纯移动会当作删除后重新添加，导致之前的git commit记录丢失
+
+
+```shell
+# 例
+.
+├─ A
+│  ├─B
+└─ C
+
+# 要改成以下文件结构
+.
+├─ A
+├─ B
+└─ C
+
+# 命令行
+git mv .\A\B .\B
+git add -u .\B  # -u更新已追踪的文件和文件夹
+git commit -m "move dir B"
+
+```
+
+该操作同样适用文件重命名
+
 ### 记录一次push过程
 背景：
 * 开发到一个阶段，准备push到远程
@@ -77,7 +105,7 @@ git pull origin hao_dev    # 拉取hao_dev分支到本地当前的分支
 vscode里可以直接点击修改
 ![image.png|360](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121650725.png)
 
-![image.png|650](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121653498.png)
+![image.png|680](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202307121653498.png)
 
 因为这两个文件是rtt工程的配置文件，比较奇葩需要用git管理，所以上传了，这里就用采用本地的修改，点击“采用当前更改”后，保存一下文件
 然后点击左侧**合并更改**里冲突文件的+号，git add修改后的冲突文件
