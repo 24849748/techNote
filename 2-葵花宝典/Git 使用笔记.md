@@ -2,6 +2,36 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+
+### git停止追踪某个文件
+场景：
+* 有些工程文件配置文件必须上传远程仓库
+* 但不想后续每次编译后在更改列表里看到它们的修改
+
+我们可以将该文件标记为 "假定为未更改"状态，**该操作只会影响git本地仓库，不会影响远程仓库**。
+
+
+暂停追踪文件改动 
+```shell
+git update-index --assume-unchanged your_file_path
+```
+
+继续追踪文件的改动
+```shell
+git update-index --no-assume-unchanged your_file_path
+```
+
+查看暂停追踪的文件：
+```shell
+# windows
+git ls-files -v | findstr "^h"
+
+# Linux
+git ls-files -v | grep "^h"
+```
+==建议慎重操作，仅适合非多人合作项目==
+
+
 ### git mv移动文件位置但不丢失git记录
 背景：
 * 需要移动某个文件或文件夹
