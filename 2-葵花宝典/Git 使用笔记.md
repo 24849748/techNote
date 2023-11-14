@@ -3,6 +3,56 @@
 * .gitignore对路径符号有严格要求。必须用 `/`
 
 
+### 追加提交（补充提交）
+场景：
+* commit完之后，发现漏了几个文件，此时还没push
+* 需要再commit一次，但又不想污染git提交记录
+
+举例：
+我合并了桃芯遥控器的基线，commit完
+```shell
+❯❯ remoter git:(master)  10:50 git log      
+commit 3aaefc3dbf7bbe1c68fedf59b9bd28ce7d3dcbcb (HEAD -> master)
+Merge: 3c13b03 b172b96
+Author: lijianpeng <bosco@pthyidh.com>
+Date:   Wed Nov 8 10:50:13 2023 +0800
+
+    chore: 更新小米遥控器基线
+```
+
+要stash pop时报了冲突，发现上次commit漏了两个工程文件
+```shell
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   mi_rcu/mi_rcu.uvoptx
+        modified:   mi_rcu/mi_rcu.uvprojx
+```
+
+#### 方式一：
+git commit --amend
+```shell
+git add
+git commit -m "chore: 补充提交更新小米遥控器基线" --amend
+```
+
+查看git log，head节点变成了最新的提交
+```shell
+❯❯ remoter - 副本 git:(master) 11:01 git log
+commit 90d14f6463e8a0680ec845ee18116dcc73d139c4 (HEAD -> master)
+Merge: 3c13b03 b172b96
+Author: lijianpeng <bosco@pthyidh.com>
+Date:   Wed Nov 8 10:50:13 2023 +0800
+
+    chore: 补充提交更新小米遥控器基线
+```
+
+#### 方式二：
+git rebase合并多个提交记录，[修改commit内容](##修改commit内容) 记录过。
+
+
+
+
 ### git停止追踪某个文件
 场景：
 * 有些工程文件配置文件必须上传远程仓库
