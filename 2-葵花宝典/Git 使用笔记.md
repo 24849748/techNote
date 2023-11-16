@@ -2,6 +2,29 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+### tag使用
+场景：
+* 软件开发到达一定里程碑
+* 需要为仓库添加版本信息
+
+tag的使用在本文档最下面记录过，但这里再详细重复一遍
+
+```shell
+git tag -a <tag> -m <tag commit> # 打tag并添加commit说明
+git tag -d <tag> # 删除标签
+
+git tag # 查看当前仓库所有标签
+git show <tag> # 查看标签节点具体信息
+```
+
+上面tag标签操作仅作用于本地仓库，对于一次版本发布还需要同步到远程仓库
+```shell
+git push <remote> <tag>   # push tag 到远程仓库
+git push <remote> --delete <tag> # 删除远程仓库具体标签
+```
+
+
+
 
 ### 追加提交（补充提交）
 场景：
