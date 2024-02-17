@@ -2,6 +2,72 @@
 * branch前面带 `*` 号为当前分支
 * .gitignore对路径符号有严格要求。必须用 `/`
 
+
+```
+[user]
+        name = lijianpeng
+        email = bosco@pthyidh.com
+[credential "http://121.43.179.105:9001"]
+        provider = generic
+[core]
+        autocrlf = false
+[credential]
+        helper = store
+
+```
+
+### git存储账户密码
+场景
+* 新装了虚拟机Linux环境
+* 有时 `git pull & push` 会提示要输入账户密码
+
+可能是本地没有存储账户密码凭证，使用一下命令配置
+```shell
+git config --global credential.helper store
+```
+
+
+### .gitattributes
+* 用来管理git行为
+* 会覆盖git全局配置
+* 可以确保当前repo下所有用户表现一致，不受系统和环境影响
+```
+text=auto eol=lf
+```
+
+```shell
+# 会把所有的文件按照当前的.gitattributes一次性修复并添加到 Git 中。
+git add --renormalize .
+```
+
+### 子模块使用
+场景：
+* clone一个带有子仓库的仓库
+* 子仓库没有拉取
+
+```shell
+# clone完之后，首次更新子仓库，后续更新可以无需 --init
+git submodule update --init [sub_repo_name]
+```
+
+```shell
+# 要在克隆的时候带上子模块一起
+git clone --recursive [url]
+```
+
+
+### archive打包发布
+场景：
+* 将仓库打包成压缩包
+
+```shell
+# 查看受支持的文件格式
+git archive -l
+
+# 基础用法 output指定输出文件名；format指定格式，如果不指定git会根据output自动猜测
+git archive --format zip --output "output.zip" master
+```
+
 ### tag使用
 场景：
 * 软件开发到达一定里程碑
