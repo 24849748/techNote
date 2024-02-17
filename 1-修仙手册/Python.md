@@ -10,6 +10,43 @@
 
 解释性带来的好处就是可以，一行一行执行，编译性需要全部编译成一个可执行文件再执行
 
+
+
+## 具体场景
+
+### 不定参实现
+`*args **kwargs`
+
+```python
+def func(arg1, arg2, *args, **kwargs):
+    print(f"arg1: {arg1}")
+    print(f"arg2: {arg2}")
+    
+    for arg in args:
+        print(f"Additional arg: {arg}")
+    
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+# 使用混合的参数
+func('value1', 'value2', 'extra1', 'extra2', key1='value1', key2='value2')
+```
+
+### 传参默认值
+```python
+# 直接在参数后面 = 即可，如果需要指定类型，在类型后面再 = 
+def func(arg1=1, arg2:str="2"):
+    pass
+
+# python要求在调用函数时，非默认参数必须出现在默认参数之前。
+def func(arg1=1, arg2) # 错误的
+    pass
+    
+def func(arg1, arg2=1) # 正确的
+    pass
+```
+
+
 ## 基础语法
 
 与C一些区别：
