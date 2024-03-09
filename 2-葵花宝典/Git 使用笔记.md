@@ -68,6 +68,52 @@ git archive -l
 git archive --format zip --output "output.zip" master
 ```
 
+### submodule子模块
+
+[参考链接](https://zhuanlan.zhihu.com/p/87053283)
+
+#### 创建submodule
+
+需要将子模块 `submodule` 添加到主仓库 `main` 中
+```shell
+git submodule add <submodule_url> [别名]
+```
+
+git 仓库会多出:
+1. `.gitmodules`
+2. `.git/config` 的一些信息
+3. `.git/modules`
+
+#### 获取submodule
+
+对于别的使用者, 直接使用git clone main仓库不会把submodule的内容克隆下来, 有两种方法克隆: 
+1. 在克隆主项目的时候带上 `--recurse submodules` 这样在git clone时会递归克隆main中的子仓库
+2. 在当前的项目中执行:
+```shell
+git submodule init
+git submodule update
+```
+
+#### 更新submodule
+
+对于子模块, 只需要管理好自己的版本, 并推送到远程通知
+对于父模块,
+1. 若子模块版本信息未提交, 需要更新子模块目录下的代码, 并执行`commit` 操作提交子模块版本信息;
+2. 若子模块版本信息已提交, 需要使用`git submodule update` ,git会自动根据子模块版本信息更新所有子模块目录相关代码
+
+#### 删除子模块
+
+使用 `git submodule deinit` 命令卸载一个子模块(.git/config), 如果该模块工作区内有本地修改, 加上参数 `--force` 会强制移除, 然后执行 `git rm` 移除实体内容(.gitmodule), 最后`commit` 会移除残余(.git/modules)
+```shell
+git submodule deinit [submodule_name]
+git rm [submodule_name]
+git commit -m "rm submodule"
+```
+
+#### 注意
+* 主项目中, 使用git add/commit不会改变项目中的子模块
+
+
 ### tag使用
 场景：
 * 软件开发到达一定里程碑
