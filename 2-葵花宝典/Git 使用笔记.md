@@ -16,6 +16,48 @@
 
 ```
 
+
+### git忽略某一行
+
+前面有提到 [git停止追踪某个文件](#git停止追踪某个文件)
+场景
+* 开发中添加了很多测试代码
+* 这些测试代码不想提交到远程
+* 希望下次还要用到
+
+步骤
+1. 配置git config filter规则
+    git config --global filter.gitignore.clean "sed '/\/\/ @noCommit start/,/\/\/ @noCommit end$/d'"
+    git config --global filter.gitignore.smudge cat
+1. 在根目录中创建 `.gitattributes` 文件, 并添加以下内容
+```
+xxx.js filter=gitignore
+```
+4. 在代码中需要屏蔽的测试代码前后添加 // @noCommit start，// @noCommit end
+
+
+局限性
+* 仅限于新增代码，对已提交的代码修改无效
+
+
+### 子模块使用记录
+场景
+* ptduino仓库上
+* 需要同时修改仓库
+
+```shell
+cd 子仓库
+# 你的代码修改
+git add
+git commit
+git push
+
+cd 主仓库
+
+git commit # 同步子仓库的更新节点
+git push
+```
+
 ### git存储账户密码
 场景
 * 新装了虚拟机Linux环境
@@ -127,6 +169,8 @@ git tag -d <tag> # 删除标签
 
 git tag # 查看当前仓库所有标签
 git show <tag> # 查看标签节点具体信息
+
+git push origin --tags # 推送所有tag到远程仓库
 ```
 
 上面tag标签操作仅作用于本地仓库，对于一次版本发布还需要同步到远程仓库
@@ -168,6 +212,7 @@ Changes not staged for commit:
 git commit --amend
 ```shell
 git add
+# 这里-m 的commit内容会把上次的内容更新掉
 git commit -m "chore: 补充提交更新小米遥控器基线" --amend
 ```
 
@@ -185,6 +230,14 @@ Date:   Wed Nov 8 10:50:13 2023 +0800
 #### 方式二：
 git rebase合并多个提交记录，[修改commit内容](##修改commit内容) 记录过。
 
+
+### upstream & downstream
+upstream和downstream是git中一个比较常用的概念。
+以我们小米遥控器的项目为例
+* 代码主要是桃芯那边的人开发的
+* 我们后面需要基于此代码进行修改
+* 我这边clone了他的代码仓库，并把代码上传到我们的gitlab仓库
+* 此时，桃芯的仓库就是我们的upstream，我们就是桃芯那边的downstream
 
 
 
@@ -413,6 +466,17 @@ git config --get core.autocrlf
 git config --global core.autocrlf true
 git config core.autocrlf true
 ```
+
+core.autocrlf说明
+```shell
+$ git config --global core.autocrlf true
+$ git config --global core.autocrlf false
+$ git config --global core.autocrlf input
+```
+* true：会基于用户当前的系统来进行自动转换，在 **Windows** 下进行 _checkout_ 就会把 **LF** 转换成 **CRLF**，如果把代码添加（add）到 Git 的缓冲区，又会自动把 **CRLF** 转换成 **LF** 。
+* false：告诉git不做转换
+* input：让git在add时转换为LF
+
 
 ### 团队提交流程
 
