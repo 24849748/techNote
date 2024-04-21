@@ -13,7 +13,13 @@
         autocrlf = false
 [credential]
         helper = store
+```
 
+### git指定仓库初始化分支
+
+```shell
+git init -b main
+git config --global init.defaultBranch main
 ```
 
 
