@@ -1,4 +1,12 @@
-
+---
+title: Python学习笔记
+date: 2024-04-28 23:55:32
+categories:
+- code
+tags:
+- Python
+published: false
+---
 
 高级语法与低级语法：
 高低级是相对于机器而言的，越高级人越容易阅读理解，越低级机器执行越高效
@@ -10,11 +18,10 @@
 
 解释性带来的好处就是可以，一行一行执行，编译性需要全部编译成一个可执行文件再执行
 
-
-
 ## 具体场景
 
 ### 不定参实现
+
 `*args **kwargs`
 
 ```python
@@ -33,12 +40,13 @@ func('value1', 'value2', 'extra1', 'extra2', key1='value1', key2='value2')
 ```
 
 ### 传参默认值
+
 ```python
 # 直接在参数后面 = 即可，如果需要指定类型，在类型后面再 = 
 def func(arg1=1, arg2:str="2"):
     pass
 
-# python要求在调用函数时，非默认参数必须出现在默认参数之前。
+# python 要求在调用函数时，非默认参数必须出现在默认参数之前。
 def func(arg1=1, arg2) # 错误的
     pass
     
@@ -46,25 +54,25 @@ def func(arg1, arg2=1) # 正确的
     pass
 ```
 
-
 ## 基础语法
 
-与C一些区别：
-* python无需 `;` 分号
-* python不区分单双引号，但前后要匹配
-* python对 缩进/空格敏感
-* python不需要特意声明变量
+与 C 一些区别：
 
+* python 无需 `;` 分号
+* python 不区分单双引号，但前后要匹配
+* python 对 缩进/空格敏感
+* python 不需要特意声明变量
 
 ### 输入输出
 
-python的输入输出比C方便，没有%格式符
-输出：`print()` 已作为python的内置函数
-输入：`input()` 
+python 的输入输出比 C 方便，没有%格式符
+输出：`print()` 已作为 python 的内置函数
+输入：`input()`
 
 PS：`input()` 输入默认为字符串
 
 ### 类型
+
 * int
 * float
 * bool
@@ -79,29 +87,34 @@ print(a) # 输出 False
 
 ### 运算
 
-普通加减乘与C一样
+普通加减乘与 C 一样
 
 对于两个字符串，可以使用+法进行**字符串拼接**
+
 ```python
-"123"+"321" # 输出123321
+"123"+"321" # 输出 123321
 ```
 
-python的乘法对于字符串变量有特殊效果
+python 的乘法对于字符串变量有特殊效果
+
 ```python
 a = "1"
-a*5 # 输出: 11111
+a*5 # 输出：11111
 ```
 
-python的除法有特殊之处：
+python 的除法有特殊之处：
+
 1. 普通除 `/` ，会自动处理精度问题
-2. 地板除 `//`，效果等同于C
+2. 地板除 `//`，效果等同于 C
+
 ```python
-2/3    # 输出: 0.66666
-2//3   # 输出: 0
+2/3    # 输出：0.66666
+2//3   # 输出：0
 ```
 
 还有 `& | !`
-python可以写成英文字母
+python 可以写成英文字母
+
 ```python
 True and False # True & False
 True or False # True | False
@@ -111,10 +124,11 @@ not True # !True
 ### 三目运算
 
 ```python
-1 if 1>2 else 2 # python的三目运算，1?1>2:2
+1 if 1>2 else 2 # python 的三目运算，1?1>2:2
 ```
 
 ### 判断
+
 ```python
 if (n := len(a)) > 10:
     #do something
@@ -123,9 +137,10 @@ if 1 in a:
     #do something
 
 if 1 not in a:
+    
 ```
 `:=` 是海象运算符
-上述 `if` 条件中不能创建变量n，使用海象运算符就可以进行**创建并赋值**
+上述 `if` 条件中不能创建变量 n，使用海象运算符就可以进行**创建并赋值**
 
 ### 循环 
 
@@ -140,7 +155,7 @@ while a < 10:
 **for**
 ```python
 a = [3,4,5]
-# for i in a:  # 从a拿一个元素赋值给i
+# for i in a:  # 从 a 拿一个元素赋值给 i
 #     print(i)
 # i
 
@@ -148,23 +163,19 @@ for i in range(len(a)):
     print(a[i])
 # list(range(1,7))
 
-for i,index in enumerate(a):  # i,index用了拆包语法
+for i,index in enumerate(a):  # i,index 用了拆包语法
     print(f"i:{i},index:{index}")
 
-
-# for语法也有break else
+# for 语法也有 break else
 a = [1,2,3]
 for i in a:
     print(i)
-    # break      # break解释for循环
-else:   # 上面运行完，默认执行一下else
+    # break      # break 解释 for 循环
+else:   # 上面运行完，默认执行一下 else
     print("asd")
 ```
 
-
-range(5)：产生一个 含有5个元素的对象
-
-
+range(5)：产生一个 含有 5 个元素的对象
 
 ### 全局变量与局部变量
 
@@ -183,7 +194,7 @@ def func1():
     a = 123
     def func2():
         print(a)
-    return func2   # 闭包，返回func2函数，等于c返回函数指针
+    return func2   # 闭包，返回 func2 函数，等于 c 返回函数指针
 ```
 
 ### 拆包语法
@@ -193,7 +204,7 @@ a,b,c=[1,2,3]
 print(a,b,c)    # 1,2,3
 ```
 
-* python中 `...` 或 `pass` 相当于c语言的空语句 ` ;`
+* python 中 `...` 或 `pass` 相当于 c 语言的空语句 ` ;`
 * // 地板除
 * ** 平方乘
 
@@ -204,24 +215,23 @@ def func1():
     a = 123
     def func2():
         print(a)
-    return func2   # 闭包，返回func2函数，等于c返回函数指针
+    return func2   # 闭包，返回 func2 函数，等于 c 返回函数指针
 
 b = func1()
-b() # 等于运行func2()
+b() # 等于运行 func2()
 func1()() # 同上
 
-# func1()里a的值会传给func2(),func2赋值给b
+# func1() 里 a 的值会传给 func2(),func2 赋值给 b
 # 执行结果
-# 123
 # 123
 ```
 
 ### 异常处理
 
-* try异常处理
-    * try不能单独存在，必须与except、else、finally关键词搭配使用
-    * python可以利用try异常处理实现c语言goto语法
-    * python有自己一套标准的异常定义，`TypeError`、`ZeroDivisionError`等
+* try 异常处理
+    * try 不能单独存在，必须与 except、else、finally 关键词搭配使用
+    * python 可以利用 try 异常处理实现 c 语言 goto 语法
+    * python 有自己一套标准的异常定义，`TypeError`、`ZeroDivisionError`等
         [菜鸟教程有对这些标准异常的详细介绍](https://www.runoob.com/python/python-exceptions.html)
     * 
 ```python
@@ -230,7 +240,7 @@ try: #捕获异常
     # 1/0       # ZeroDivisionError
 except: # 异常处理
     print("error")
-# except ZeroDivisionError as e: # 捕获指定异常,并取别名为e
+# except ZeroDivisionError as e: # 捕获指定异常，并取别名为 e
 #     print(e) # 打印报错的解释
 #     print("error")
 # except Exception as e: # 捕获所有异常
@@ -239,20 +249,20 @@ except: # 异常处理
 # # except (ZeroDivisionError, TypeError): # 捕获多个指定异常
 # #     print("error")
 # else:   # 如果没有捕获到异常
-#     print("靓仔,谋问题!")
+#     print("靓仔，谋问题！")
 finally: # 报不报错最终都会执行，且在报错前执行
     print("bye")
 ```
 
-除了try，**assert**在python中同样适用，assert 判断后面True/False
+除了 try，**assert **在 python 中同样适用，assert 判断后面 True/False
 ```python
 assert 1==1
 ```
 
-### 匿名函数lambda
+### 匿名函数 lambda
 
-用lambda定义的函数可以不用取名，适用于只使用一次，取名困难症患者的福音
-格式：`lambda 参数:返回值`
+用 lambda 定义的函数可以不用取名，适用于只使用一次，取名困难症患者的福音
+格式：`lambda 参数：返回值`
 
 ```python
 lambda a : a**a
@@ -265,9 +275,9 @@ b = (lambda a : a**a)(2) # lambda a : a**a 就是一个函数
 b = func(2)
 ```
 
-### 装饰器 #Python装饰器
+### 装饰器 #Python 装饰器
 
-装饰器本质是闭包，相当于A函数被B函数包裹，用B装饰A
+装饰器本质是闭包，相当于 A 函数被 B 函数包裹，用 B 装饰 A
 ```python
 # 例如，获取某个函数执行时间
 import time
@@ -289,7 +299,7 @@ def get_run_time(fun):
         print(t2-t1)
     return get_time
 
-@get_run_time       # 装饰器用法，在func1外面叠加一个函数
+@get_run_time       # 装饰器用法，在 func1 外面叠加一个函数
 def func1():
     print(123)
     time.sleep(1)
@@ -297,7 +307,7 @@ def func1():
 func1()
 ```
 
-### 迭代器 #Python迭代器 
+### 迭代器 #Python 迭代器 
 
 list_iterator
 
@@ -312,9 +322,9 @@ next(b)  #4
 # next(b)  #error
 ```
 
-python的for语法里面就有迭代器（in后面的参数）
+python 的 for 语法里面就有迭代器（in 后面的参数）
 ```python
-# 如要使a所有元素+1
+# 如要使 a 所有元素+1
 a= [1,2,3,4]
 for index,i in enumerate(a):
     # i = i + 1
@@ -329,27 +339,25 @@ b = [i+1 for i in a]
 #     b.append(i+1)
 b
 
-## 要取部分内容，可以对a切片
+## 要取部分内容，可以对 a 切片
 # print(a[1:3])
 # b = [i+1 for i in a[1:3]]
 ```
 
-### 生成器 #Python生成器
+### 生成器 #Python 生成器
 
 生成器比迭代器更节省内存
 
 关键字：yield
-替代函数里的return
+替代函数里的 return
 
 ```python
 c = [1,2,3,4]
 def func(a):
-    for i in a:         # a的值赋给i，后面对i操作
+    for i in a:         # a 的值赋给 i，后面对 i 操作
         yield i+1       # 第一次运行到这返回后，保存资源，第二次继续从这运行，体现“生成”
   
 b = func(c)
-next(b)
-next(b)
 next(b)
 ```
 
@@ -368,10 +376,9 @@ for index,i in enumerate(a):
     if index == 10 :
         break
 
-a = [1,2,3,4]    # []列表
-(i+1 for i in a) # ()变成生成器
+a = [1,2,3,4]    # [] 列表
+(i+1 for i in a) # () 变成生成器
 ```
-
 
 ## 容器
 
@@ -379,19 +386,18 @@ a = [1,2,3,4]    # []列表
 
 标识：`" "`
 
-python中str类型由容器实现，以 `a = "123456789"` 为例：
+python 中 str 类型由容器实现，以 `a = "123456789"` 为例：
 
 容器的操作：
-* 索引，与C数组操作一样，支持**负数**索引
-    * a[0]，取第0位数据，输出 `1`
-    * a[-1]，取倒数第1位
+* 索引，与 C 数组操作一样，支持**负数**索引
+    * a[0]，取第 0 位数据，输出 `1`
+    * a[-1]，取倒数第 1 位
 * 切片，**左包括，右不包括**，必须从小到大
-    * a[2:5]，取第2到第4位的数据，输出 `345`
-    * a[-5,-2]，取倒数第5位到倒数第3位，输出 `567`
-    * a[:5]，取0到第4位，输出 `12345`
-    * a[4:]，取第4到最后一位，输出 `56789`
+    * a[2:5]，取第 2 到第 4 位的数据，输出 `345`
+    * a[-5,-2]，取倒数第 5 位到倒数第 3 位，输出 `567`
+    * a[:5]，取 0 到第 4 位，输出 `12345`
+    * a[4:]，取第 4 到最后一位，输出 `56789`
 * 使用 `len()` 获取容器长度，类比 `strlen()`
-
 
 ### 列表
 
@@ -406,10 +412,10 @@ python中str类型由容器实现，以 `a = "123456789"` 为例：
 * append：新增一个元素，如：[1,2,3] 整个放进去
 * extend：新增一串元素，如：[1,2,3] 一个一个取出再放进去
 * clear：清空
-* copy：拷贝  // 区分c=a和c=a.copy()
+* copy：拷贝  // 区分 c=a 和 c=a.copy()
     * c=a 相当于指针操作
     * c=a.copy() 内存拷贝
-* count：计算重复的次数 // 不同len()
+* count：计算重复的次数 // 不同 len()
 * index：从左到右找到元素位置
 * insert：插入
 
@@ -420,26 +426,25 @@ a = [1,2,3,4,5,6,7,8]
 a.append([1,2,3])    # 1,2,3,4,5,6,7,8,[1,2,3]
 a.extend([1,2,3])    # 1,2,3,4,5,6,7,8,1,2,3
 a.clear()
-c = a    # 相当于a指针操作，后续对c操作同样会影响a
-c = a.copy()    # 相当于内存拷贝，c和a各单独一份
-a.count(4)    # 1,计算list中4重复的次数
-a.index(4)    # 4,查找第index个元素
+c = a    # 相当于 a 指针操作，后续对 c 操作同样会影响 a
+c = a.copy()    # 相当于内存拷贝，c 和 a 各单独一份
+a.count(4)    # 1, 计算 list 中 4 重复的次数
+a.index(4)    # 4, 查找第 index 个元素
 a.insert(2,[3,3])    
-a    # 1,2,[3,3],3,4,5,6,7,8  在第2个位置插入[3,3]
+a    # 1,2,[3,3],3,4,5,6,7,8  在第 2 个位置插入 [3,3]
 
 del a[3]   # 删除
 ```
 
-
 ### 元组 
 
-不能修改的list列表，相当于加了const
+不能修改的 list 列表，相当于加了 const
 标识：可有可无`( )`
 
 ```python
 a = 1,2,3
 b = list(a)
-type(a)  # list，然后就可以通过list操作元素了
+type(a)  # list，然后就可以通过 list 操作元素了
 ```
 
 ### 字典 dict
@@ -466,21 +471,20 @@ type(a)  # list，然后就可以通过list操作元素了
 ```python
 a = {1,2,3} 
 b = {4,5,6} # 无序性
-a = {1,2,3,3} # 唯一性,可去重
+a = {1,2,3,3} # 唯一性，可去重
 
 a.add(4)
 a.difference(b)
 a.discard(1) # 删除
 a.intersection(b) 
-a.union(b) # 并集不会修改原来的a
+a.union(b) # 并集不会修改原来的 a
 
 A & B # 交集
 A | B # 并集
 A - B # 差集
-A ^ B # 对称差集（在A或B中，但不会同时出现在AB中）
+A ^ B # 对称差集（在 A 或 B 中，但不会同时出现在 AB 中）
 
 ```
-
 
 # 函数
 
@@ -491,12 +495,10 @@ A ^ B # 对称差集（在A或B中，但不会同时出现在AB中）
 * 函数重载
 * 可以指定传入参数类型
 
-
 ```python
-def func(a:int):    # 告诉python传入的是int类型，但不限定是int，期望、描述，你可以叛逆传入字符串等
+def func(a:int):    # 告诉 python 传入的是 int 类型，但不限定是 int，期望、描述，你可以叛逆传入字符串等
     ...
 ```
-
 
 ## 文件操作
 
@@ -509,7 +511,6 @@ def func(a:int):    # 告诉python传入的是int类型，但不限定是int�
 |   r   |   打开只读文件   |  r+   |   打开可读写文件   |
 |   a   | 追加打开只写文件 |  a+   | 追加打开可读写文件 |
 |  -b   | 以二进制方式操作 |       |                    |
-
 
 ```python
 # 读
@@ -530,7 +531,7 @@ f.close()
 txt
 
 # 上面的等效替代
-# 这种写法无需考虑close，不用担心没有close文件
+# 这种写法无需考虑 close，不用担心没有 close 文件
 with open("test.txt","r") as f:
     txt = f.read()
 print(txt)
@@ -545,7 +546,6 @@ with open("hello.txt","w") as d:
 with open("1.html","w",encoding="utf-8") as f:
     f.write(res.text)
 ```
-
 
 # 类与对象
 
@@ -565,7 +565,7 @@ with open("1.html","w",encoding="utf-8") as f:
 
 ```python
 class people:
-    def __init__(self,name): # class的构造函数，在class创建对象时默认调用
+    def __init__(self,name): # class 的构造函数，在 class 创建对象时默认调用
         self.name = name
         self.food = "没吃"
         print(f"创建了{self.name}")
@@ -573,7 +573,7 @@ class people:
     def __del__(self): # 析构函数，在对象删除时调用，用得不多
         print("del")
 
-    def eat(self, food): # class里所有func第一个参数需要传self
+    def eat(self, food): # class 里所有 func 第一个参数需要传 self
         self.food = food
         print(f"{self.name}吃了一个{food}")
   
@@ -584,32 +584,31 @@ person = people("张三") # 类创建对象的参数默认传给__init__函数
 # person.__dir__() # 返回对象所有方法
 # person.eat("apple")
 person.get_eat()
-del person # 使用del删除对象
-del person.name # 使用del删除对象的属性
+del person # 使用 del 删除对象
+del person.name # 使用 del 删除对象的属性
 ```
 
-* **类里面的func第一个参数必须传self**，self参数是对类的当前实例的引用
-* 类定义不能为空，可以使用pass语句避免错误
-
+* **类里面的 func 第一个参数必须传 self**，self 参数是对类的当前实例的引用
+* 类定义不能为空，可以使用 pass 语句避免错误
 
 # 库
 
 使用库
 ```python
 import os # 普通导入
-import os as o  # 导入os库并重命名为o
+import os as o  # 导入 os 库并重命名为 o
 
-import os.path #导入os库里的path子模块
-from os import path #效果同上，但上面的调用需要os.path,这个可以直接path
+import os.path #导入 os 库里的 path 子模块
+from os import path #效果同上，但上面的调用需要 os.path, 这个可以直接 path
 ```
 
 * os：系统库
-* shutil：os库补充，专门用来操作文件
+* shutil：os 库补充，专门用来操作文件
 * requests：网络相关的
 
 **可使用 `help()` 查看库或函数的帮助文档**：`help(os.path)`
 
-### json库
+### json 库
 
 **字符串**
 * `json.dumps()`：编码
@@ -617,7 +616,7 @@ from os import path #效果同上，但上面的调用需要os.path,这个可以
 ![](https://c1ns.cn/EqrgV)
 ![image.png|460](https://raw.githubusercontent.com/24849748/PicBed/main/ob/202306041840649.png)
 
-python json类型对应表
+python json 类型对应表
 编码：
 |    Python    |  JSON  |
 |:------------:|:------:|
@@ -640,17 +639,13 @@ python json类型对应表
 * `json.dump()`：编码
 * `json.load()`：解码
 
-
-
 # 未整理
-
 
 `if __name__ == "__main__":`
 
 tips：
 1. 路径作为字符串前面要加上 `r`，因为包含 `\`，
-2. os.walk返回的文件路径是当前python文件的路径
-
+2. os.walk 返回的文件路径是当前 python 文件的路径
 
 Todo：
 - [ ] python 多任务
