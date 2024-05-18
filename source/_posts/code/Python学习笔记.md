@@ -5,8 +5,46 @@ categories:
 - code
 tags:
 - Python
-published: false
 ---
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [前言](#前言)
+- [基础语法](#基础语法)
+  - [输入输出](#输入输出)
+  - [类型](#类型)
+  - [运算](#运算)
+  - [三目运算](#三目运算)
+  - [判断](#判断)
+  - [循环](#循环)
+  - [全局变量与局部变量](#全局变量与局部变量)
+- [高级/特殊语法](#高级特殊语法)
+  - [函数嵌套定义](#函数嵌套定义)
+  - [拆包语法](#拆包语法)
+  - [闭包语法](#闭包语法)
+  - [异常处理](#异常处理)
+  - [匿名函数 lambda](#匿名函数-lambda)
+  - [装饰器](#装饰器)
+  - [迭代器](#迭代器)
+  - [生成器](#生成器)
+- [容器](#容器)
+  - [字符串](#字符串)
+  - [列表](#列表)
+  - [元组](#元组)
+  - [字典 dict](#字典-dict)
+  - [集合 set](#集合-set)
+- [函数](#函数)
+- [文件操作](#文件操作)
+- [类与对象](#类与对象)
+- [库](#库)
+  - [json 库](#json-库)
+
+<!-- /code_chunk_output -->
+
+
+## 前言
 
 高级语法与低级语法：
 高低级是相对于机器而言的，越高级人越容易阅读理解，越低级机器执行越高效
@@ -16,43 +54,7 @@ published: false
 | 高级语言 | 非高级语言 |
 |  解释性  |   编译性   |
 
-解释性带来的好处就是可以，一行一行执行，编译性需要全部编译成一个可执行文件再执行
-
-## 具体场景
-
-### 不定参实现
-
-`*args **kwargs`
-
-```python
-def func(arg1, arg2, *args, **kwargs):
-    print(f"arg1: {arg1}")
-    print(f"arg2: {arg2}")
-    
-    for arg in args:
-        print(f"Additional arg: {arg}")
-    
-    for key, value in kwargs.items():
-        print(f"{key}: {value}")
-
-# 使用混合的参数
-func('value1', 'value2', 'extra1', 'extra2', key1='value1', key2='value2')
-```
-
-### 传参默认值
-
-```python
-# 直接在参数后面 = 即可，如果需要指定类型，在类型后面再 = 
-def func(arg1=1, arg2:str="2"):
-    pass
-
-# python 要求在调用函数时，非默认参数必须出现在默认参数之前。
-def func(arg1=1, arg2) # 错误的
-    pass
-    
-def func(arg1, arg2=1) # 正确的
-    pass
-```
+解释性带来的好处就是可以，一行一行执行；编译性需要全部编译成一个可执行文件再执行
 
 ## 基础语法
 
@@ -261,7 +263,7 @@ assert 1==1
 
 ### 匿名函数 lambda
 
-用 lambda 定义的函数可以不用取名，适用于只使用一次，取名困难症患者的福音
+用 lambda 定义的函数可以不用取名，适用于只使用一次的场景，取名困难症患者的福音
 格式：`lambda 参数：返回值`
 
 ```python
@@ -275,7 +277,7 @@ b = (lambda a : a**a)(2) # lambda a : a**a 就是一个函数
 b = func(2)
 ```
 
-### 装饰器 #Python 装饰器
+### 装饰器
 
 装饰器本质是闭包，相当于 A 函数被 B 函数包裹，用 B 装饰 A
 ```python
@@ -307,7 +309,7 @@ def func1():
 func1()
 ```
 
-### 迭代器 #Python 迭代器 
+### 迭代器
 
 list_iterator
 
@@ -344,7 +346,7 @@ b
 # b = [i+1 for i in a[1:3]]
 ```
 
-### 生成器 #Python 生成器
+### 生成器
 
 生成器比迭代器更节省内存
 
@@ -486,7 +488,7 @@ A ^ B # 对称差集（在 A 或 B 中，但不会同时出现在 AB 中）
 
 ```
 
-# 函数
+## 函数
 
 * `def func(arg):`
 * 支持默认参数 `arg=1`
@@ -547,7 +549,7 @@ with open("1.html","w",encoding="utf-8") as f:
     f.write(res.text)
 ```
 
-# 类与对象
+## 类与对象
 
 对象是**类的具象**：
 * 对象是人要进行研究的具体事物
@@ -591,7 +593,7 @@ del person.name # 使用 del 删除对象的属性
 * **类里面的 func 第一个参数必须传 self**，self 参数是对类的当前实例的引用
 * 类定义不能为空，可以使用 pass 语句避免错误
 
-# 库
+## 库
 
 使用库
 ```python
@@ -638,15 +640,3 @@ python json 类型对应表
 **文件**
 * `json.dump()`：编码
 * `json.load()`：解码
-
-# 未整理
-
-`if __name__ == "__main__":`
-
-tips：
-1. 路径作为字符串前面要加上 `r`，因为包含 `\`，
-2. os.walk 返回的文件路径是当前 python 文件的路径
-
-Todo：
-- [ ] python 多任务
-- [ ] 
