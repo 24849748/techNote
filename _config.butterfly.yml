@@ -109,7 +109,7 @@ post_meta:
     tags: false # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
-    date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
+    date_type: created # created or updated or both 文章頁日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 文章頁是否顯示分類
     tags: true # true or false 文章頁是否顯示標籤
@@ -228,7 +228,7 @@ aside:
   card_author:
     enable: true
     description:
-    button:
+    button: # 头像下方关注按钮
       enable: true
       icon: fab fa-github
       text: Follow Me
@@ -236,16 +236,19 @@ aside:
   card_announcement:
     enable: true
     content: 🙂搭建此博客是为了方便随时查看我的技术笔记，并和广大网友一起分享。若有侵权请及时通知我。
+  # 右侧近期发布的文章
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
     sort: date # date or updated
     sort_order: # Don't modify the setting unless you know how it works
+  # 右侧分类
   card_categories:
     enable: true
-    limit: 8 # if set 0 will show all
+    limit: 5 # if set 0 will show all
     expand: none # none/true/false
     sort_order: # Don't modify the setting unless you know how it works
+  # 标签
   card_tags:
     enable: true
     limit: 40 # if set 0 will show all
@@ -253,6 +256,7 @@ aside:
     orderby: random # Order of tags, random/name/length
     order: 1 # Sort of order. 1, asc for ascending; -1, desc for descending
     sort_order: # Don't modify the setting unless you know how it works
+  # 归档
   card_archives:
     enable: true
     type: monthly # yearly or monthly
@@ -274,9 +278,9 @@ aside:
 # busuanzi count for PV / UV in site
 # 訪問人數
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
@@ -390,7 +394,7 @@ docsearch:
 # Share.js
 # https://github.com/overtrue/share.js
 sharejs:
-  enable: true
+  enable: false
   sites: facebook,twitter,wechat,weibo,qq
 
 # AddToAny
@@ -697,13 +701,13 @@ canvas_nest:
 
 # Mouse click effects: fireworks (鼠標點擊效果: 煙火特效)
 fireworks:
-  enable: true
+  enable: false
   zIndex: 9999 # -1 or 9999
   mobile: false
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
-  enable: false
+  enable: true
   mobile: false
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
