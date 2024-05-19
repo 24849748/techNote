@@ -232,10 +232,10 @@ aside:
     button: # 头像下方关注按钮
       enable: true
       icon: fab fa-github
-      text: Follow Me
+      text: Github
       link: https://github.com/24849748
   card_announcement:
-    enable: true
+    enable: false
     content: 🙂搭建此博客是为了方便随时查看我的技术笔记，并和广大网友一起分享。若有侵权请及时通知我。
   # 右侧近期发布的文章
   card_recent_post:
@@ -755,7 +755,7 @@ hr_icon:
 
 # the subtitle on homepage (主頁subtitle)
 subtitle:
-  enable: false
+  enable: true
   # Typewriter Effect (打字效果)
   effect: true
   # Customize typed.js (配置typed.js)
