@@ -7,18 +7,6 @@ tags:
 - Python
 ---
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [不定参实现](#不定参实现)
-- [传参默认值](#传参默认值)
-- [程序入口](#程序入口)
-- [其他](#其他)
-
-<!-- /code_chunk_output -->
-
-
 ### 不定参实现
 
 `*args **kwargs`
