@@ -33,6 +33,86 @@ git init -b main
 git config --global init.defaultBranch main
 ```
 
+### 重命名分支
+
+```shell
+git branch -m [new-name] ## 当前分支
+git branch -m [old-branch] [new-branch] ## 指定分支
+```
+
+### 将子目录独立为一个新仓库
+
+> https://prinsss.github.io/splitting-a-subfolder-out-into-a-new-git-repository/
+
+* 一开始创建仓库没考虑很多，随着开发提交越来越多
+* 希望将目录独立出来，保留该目录在原仓库的所有提交记录
+* 作为原仓库的子仓库管理
+
+```shell
+# 1.在原仓库下提取要分离子文件夹的所有提交记录
+git subtree split -P [subdir] -b [branch-temp]
+```
+
+```shell
+# 2.原仓库外创建一个新的文件夹，并初始化为 git 仓库
+mkdir [subdir]
+git init
+
+# 将原仓库的 [branch-temp] 分支拉取到新仓库
+git pull [原仓库地址] [branch-temp]
+```
+
+```shell
+# 3.移除原仓库 [subdir] 目录及其提交记录
+git rm -rf [subdir]
+git commit -m 'Remove some fxxking shit'
+
+# 4.移除 1 分离出来的临时分支
+git branch -D [branch-temp]
+
+# 5.作为子模块与原仓库关联
+git submodule add [新仓库地址] [subdir]
+```
+
+注意备份, 原来 .gitignore 忽略的文件可能需要重新添加
+
+### 更换子模块 url
+
+```shell
+## 1. 修改 .gitmodule url 链接
+## 2. 更新
+git submodule sync
+## 3. 初始化子模块
+git submodule init
+## 4. 更新
+git submodule update
+```
+
+### git stash 进阶使用
+
+```shell
+# 等同于 git stash
+git stash push
+
+# 指定某个文件，并添加 commit 信息
+git stash push -m "commit message" file1 file2
+
+# 查看 stash 记录
+git stash list
+
+# 恢复某个 stash 并删除 stash 记录
+git stash pop stash@{0}
+
+# 恢复某个 stash，但不删除 stash 记录
+git stash apply stash@{0}
+
+# 删除某个 stash
+git stash drop stash@{0}
+
+# 删除所有 stash
+git stash clear
+```
+
 ### gitignore 特殊规则
 
 ```
