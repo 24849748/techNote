@@ -4,9 +4,11 @@
 
 # Site
 title: bblog
-subtitle: 等我不想学了我就天天打开这个网站啥也不干
-description: '🙂个人技术博客，搭建仅是为了方便随时查看我的技术笔记，侵删。'
-keywords: BLE,单片机,嵌入式,C语言
+subtitle: 吾尝终日而思矣，不如须臾之所学也。
+# subtitle: 一想全是问题，一做全是答案
+# description: '🙂个人技术博客，搭建仅是为了方便随时查看我的技术笔记，侵删。'
+description: '大脑🧠容量有限，做个网站补救一下😅。'
+keywords: BLE,单片机,嵌入式,C语言,Linux
 author: bosco
 # language: en
 language: zh-CN

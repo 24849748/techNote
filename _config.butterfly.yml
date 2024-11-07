@@ -221,7 +221,7 @@ aside:
   hide: false
   button: true
   mobile: true # display on mobile
-  position: right # left or right
+  position: left # left or right
   display:
     archive: true
     tag: true
@@ -240,7 +240,7 @@ aside:
   # 右侧近期发布的文章
   card_recent_post:
     enable: true
-    limit: 5 # if set 0 will show all
+    limit: 3 # if set 0 will show all
     sort: date # date or updated
     sort_order: # Don't modify the setting unless you know how it works
   # 右侧分类
@@ -251,7 +251,7 @@ aside:
     sort_order: # Don't modify the setting unless you know how it works
   # 标签
   card_tags:
-    enable: true
+    enable: false
     limit: 40 # if set 0 will show all
     color: true
     orderby: random # Order of tags, random/name/length
@@ -259,7 +259,7 @@ aside:
     sort_order: # Don't modify the setting unless you know how it works
   # 归档
   card_archives:
-    enable: true
+    enable: false
     type: monthly # yearly or monthly
     format: MMMM YYYY # eg: YYYY年MM月
     order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
@@ -639,8 +639,8 @@ index_top_img_height:
 # The user interface setting of category and tag page (category和tag頁的UI設置)
 # index - same as Homepage UI (index 值代表 UI將與首頁的UI一樣)
 # default - same as archives UI 默認跟archives頁面UI一樣
-category_ui: # 留空或 index
-tag_ui: # 留空或 index
+category_ui: index # 留空或 index
+tag_ui: index # 留空或 index
 
 # Stretches the lines so that each line has equal width（文字向兩側對齊，對最後一行無效）
 text_align_justify: false
@@ -648,10 +648,11 @@ text_align_justify: false
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
+# background: /img/bg.jpg
 background:
-
+# background: url(https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg)
 # Footer Background
-footer_bg: false
+footer_bg: true
 
 # Add mask to header or footer (为 header 或 footer 添加黑色半透遮罩)
 mask:
@@ -874,7 +875,7 @@ instantpage: false
 # https://github.com/vinta/pangu.js
 # Insert a space between Chinese character and English character (中英文之間添加空格)
 pangu:
-  enable: true
+  enable: false
   field: site # site/post
 
 # Lazyload (圖片懶加載)
