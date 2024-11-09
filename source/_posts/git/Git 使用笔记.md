@@ -1,11 +1,11 @@
 ---
 title: Git使用笔记
-date: 2024-04-27 23:55:32
 categories:
-- tools
-tags: 
-- Git
+  - git
+tags:
+  - Git
 published: false
+date: 2024-04-27 23:55:32
 ---
 
 # Git 使用笔记
