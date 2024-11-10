@@ -239,7 +239,7 @@ aside:
     content: 🙂搭建此博客是为了方便随时查看我的技术笔记，并和广大网友一起分享。若有侵权请及时通知我。
   # 右侧近期发布的文章
   card_recent_post:
-    enable: true
+    enable: false
     limit: 3 # if set 0 will show all
     sort: date # date or updated
     sort_order: # Don't modify the setting unless you know how it works
