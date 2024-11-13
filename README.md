@@ -3,7 +3,7 @@
 
 ## hexo cmd
 
-```shell
+```bash
 
 ## 初次安装 hexo
 npm install -g hexo-cli
@@ -14,6 +14,9 @@ hexo g
 hexo s
 ## 部署
 hexo d
+
+## 重新编译 + 预览
+hexo clean && hexo g && hexo s
 ```
 
 `hexo deploy` 前调用 pangu 格式化一下

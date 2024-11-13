@@ -64,7 +64,7 @@ code:
       # Select a style in the link
       # See: https://highlightjs.org/demo/
       style: "github gist"
-      style_dark: "dark"
+      style_dark: "atom-one-dark"
 
     prismjs:
       # 在下方链接页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
@@ -87,7 +87,7 @@ fun_features:
 
     # 打印速度，数字越大越慢
     # Typing speed, the larger the number, the slower
-    typeSpeed: 70
+    typeSpeed: 100
 
     # 游标字符
     # Cursor character
@@ -95,7 +95,7 @@ fun_features:
 
     # 是否循环播放效果
     # If true, loop animation
-    loop: false
+    loop: true
 
     # 在指定页面开启，不填则在所有页面开启
     # Enable in specified page, all pages by default
@@ -111,10 +111,10 @@ fun_features:
     placement: left
 
     # Options: hover | always
-    visible: hover
+    visible: always
 
     # Options: § | # | ❡
-    icon: ""
+    icon: "§"
 
   # 加载进度条
   # Progress bar when loading
@@ -132,7 +132,7 @@ dark_mode:
   # 默认的选项（当用户手动切换后则不再按照默认模式），选择 `auto` 会优先遵循 prefers-color-scheme，其次按用户本地时间 18 点到次日 6 点之间进入暗色模式
   # Default option (when the visitor switches manually, the default mode is no longer followed), choosing `auto` will give priority to prefers-color-scheme, and then enter the dark mode from 18:00 to 6:00 in the visitor's local time
   # Options: auto | light | dark
-  default: auto
+  default: dark
 
 # 主题颜色配置，其他不生效的地方请使用自定义 css 解决，配色可以在下方链接中获得启发
 # Theme color, please use custom CSS to solve other colors, color schema can be inspired by the links below
@@ -348,7 +348,7 @@ iconfont: //at.alicdn.com/t/c/font_1736178_k526ubmyhba.css
 navbar:
   # 导航栏左侧的标题，为空则按 hexo config 中 `title` 显示
   # The title on the left side of the navigation bar. If empty, it is based on `title` in hexo config
-  blog_title: "Fluid"
+  blog_title: "bblog"
 
   # 导航栏毛玻璃特效，实验性功能，可能会造成页面滚动掉帧和抖动，部分浏览器不支持会自动不生效
   # Navigation bar frosted glass special animation. It is an experimental feature
@@ -482,7 +482,8 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -501,7 +502,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示
     # If empty, text based on `subtitle` in hexo config
-    text: "An elegant Material-Design theme for Hexo"
+    text: "吾尝终日而思矣，不如须臾之所学也。"
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
@@ -554,7 +555,8 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -918,7 +920,8 @@ discuss:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
@@ -929,7 +932,8 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
@@ -958,7 +962,8 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   tagcloud:
@@ -975,18 +980,20 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
-  avatar: /img/avatar.png
-  name: "Fluid"
-  intro: "An elegant theme for Hexo"
+  # avatar: /img/avatar.png
+  avatar: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/20240424232808.png
+  name: "bosco"
+  intro: "大脑🧠容量有限，做个网站补救一下😅。"
   # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
   # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, the icon is no longer a link, but a hovering QR code
   icons:
-    - { class: "iconfont icon-github-fill", link: "https://github.com", tip: "GitHub" }
-    - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
-    - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
+    - { class: "iconfont icon-github-fill", link: "https://github.com/24849748", tip: "GitHub" }
+    # - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
+    # - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
 
 
 #---------------------------
@@ -997,7 +1004,8 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
@@ -1008,7 +1016,8 @@ page:
 #---------------------------
 page404:
   enable: true
-  banner_img: /img/default.png
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 85
   banner_mask_alpha: 0.3
   # 重定向到首页的延迟(毫秒)
@@ -1021,8 +1030,9 @@ page404:
 # Links Page
 #---------------------------
 links:
-  enable: true
-  banner_img: /img/default.png
+  enable: false
+  # banner_img: /img/default.png
+  banner_img: https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/bg.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   # 友链的成员项
