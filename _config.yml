@@ -107,7 +107,8 @@ ignore:
 # theme: instapaper
 # theme: chan
 # theme: yilia
-theme: butterfly
+# theme: butterfly
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
