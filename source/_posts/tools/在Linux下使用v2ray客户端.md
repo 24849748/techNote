@@ -18,7 +18,7 @@ published: false
 
 ## 安装
 
-```shell
+```bash
 # 解压，可以先替换自己的 config.json 到目录下
 unzip v2ray-linux-64.zip -d v2ray-linux-64
 
@@ -57,7 +57,7 @@ sudo systemctl enable v2ray
 
 ## 设置快速代理 alias
 把下面内容保存为 proxy.sh 脚本，并在在`.bashrc` 或 `.zshrc` 中 source 一下
-```shell
+```bash
 function set_proxy() {
     # 自动获取宿主 Windows 的 IP 地址
     export http_proxy=http://127.0.0.1:10809

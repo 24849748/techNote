@@ -62,7 +62,7 @@ published: false
 ## 远程免密登录
 ### 1、生成本地 ssh 密钥
 
-```shell
+```bash
 ssh-keygen
 ```
 
@@ -72,7 +72,7 @@ id_rsa.pub   // 我们要上传的公钥
 
 ### 2、上传密钥到远程服务器
 
-```shell
+```bash
 ssh-copy-id [remote ip]
 ```
 
