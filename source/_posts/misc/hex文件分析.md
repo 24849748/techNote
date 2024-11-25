@@ -15,7 +15,7 @@ published: true
 如果使用 vscode，建议安装 hex 高亮插件（Intel HEX format），方便阅读。
 
 从横向空间看，可以将格式划分为
-```
+```bash
 len(1) addr(2) cmd(3) data(len) end(1)
 ```
 
@@ -43,7 +43,7 @@ len(1) addr(2) cmd(3) data(len) end(1)
 第一行，
 04 表示将 0x0202 设置为拓展地址，并直到下一次遇到 04 前有效，
 F6 是校验值，计算如下：
-```
+```bash
 F6 = 0xff & (0x100 - (0x02 + 0x00 + 0x00 + 0x04 + 0x02 + 0x02))
 ```
 
