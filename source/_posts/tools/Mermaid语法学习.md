@@ -1,11 +1,10 @@
 ---
-title: Mermaid 语法学习
+title: mermaid 语法学习
 date: 2024-04-28 23:55:32
 categories:
-- tools
+  - tools
 tags:
-- Mermaid
-published: false
+  - mermaid
 ---
 
 ## Mermaid 介绍
