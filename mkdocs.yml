@@ -16,10 +16,18 @@ nav:
       - 基础概念: ble/BLE基础概念.md 
   - Linux:
       - 进程: linux/D1-进程.md
+      - 信号: linux/D2-信号.md
+      - 管道: linux/D3-管道.md
+      - 消息队列: linux/D4-消息队列.md
+      - 共享内存: linux/D5-共享内存.md
+      - 线程: linux/D6-线程.md
+      - POSIX信号量: linux/D7-POSIX信号量.md
+      - POSIX互斥锁: linux/D8-POSIX互斥锁.md
   - 应用笔记:
     - git:
         - 基础操作: git/Git 基础操作.md
-        - 使用笔记: git/Git 使用笔记.md
+        # - 使用笔记: git/Git 使用笔记.md
+        - 常见ignore规则: git/gitignore书写规则.md
 
 
 # 站点信息

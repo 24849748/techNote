@@ -7,8 +7,6 @@ tags:
   - Git
 ---
 
-这里记录 .gitignore 文件的一些书写规则
-
 ```bash
 # 忽略*.o和*.a文件
 *.[oa]
