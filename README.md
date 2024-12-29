@@ -1,27 +1,14 @@
 
 [博客网址](https://24849748.github.io/)
 
-## hexo cmd
+## mkdocs cmd
 
 ```bash
-
-## 初次安装 hexo
-npm install -g hexo-cli
-
-## 编译
-hexo g
-## 浏览器预览
-hexo s
-## 部署
-hexo d
-
-## 重新编译 + 预览
-hexo clean && hexo g && hexo s
+mkdocs serve
+mkdocs build
+mkdocs gh-deploy --clean
 ```
-
-`hexo deploy` 前调用 pangu 格式化一下
-
 
 ## ⚠️使用注意
 
-**文档内图片已用图床工具上传到github个人仓库，访问需要注意网络环境**
+* 部署前注意文档格式化 pangu
