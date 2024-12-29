@@ -1,0 +1,1609 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="bosco's technical notes.">
+      
+      
+        <meta name="author" content="bosco">
+      
+      
+        <link rel="canonical" href="https://24849748.github.io/ble/BLE%E8%93%9D%E7%89%99%E5%AD%A6%E4%B9%A0/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>BLE学习笔记 - bblog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h224V368c0-26.5 21.5-48 48-48h112V96c0-35.3-28.7-64-64-64zm384 320H336c-8.8 0-16 7.2-16 16v112l32-32 64-64z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96v320c0 53 43 96 96 96h320c17.7 0 32-14.3 32-32s-14.3-32-32-32v-64c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H96m0 384h256v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32m32-240c0-8.8 7.2-16 16-16h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16m16 48h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512m-40-176h24v-64h-24c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-80c-13.3 0-24-10.7-24-24s10.7-24 24-24m40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6S434.5.2 425.3 9.3L381.7 53c-48 48-113.1 75-181 75H64c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64v128c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V352h8.7c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V300.3c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4zm-64 76.7v262.6C357.2 317.8 280.5 288 200.7 288H192v-96h8.7c79.8 0 156.5-29.8 215.3-83.3"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512m-86.2-346.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1 0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6-13.3 0-24-10.7-24-24v-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1 0-8.4-6.8-15.1-15.1-15.1h-58.3c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1-64 0"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7.2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8.2-40.1l216-368C228.7 39.5 241.8 32 256 32m0 128c-13.3 0-24 10.7-24 24v112c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24m32 224a32 32 0 1 0-64 0 32 32 0 1 0 64 0"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.1 52.4 442.6 6.5c-1.9-3.9-6.1-6.5-10.5-6.5s-8.5 2.6-10.4 6.5l-16.5 45.9-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4 0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2 0-4.6-3-8.9-7.2-10.4zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9c-22-8-45.8-12.3-70.5-12.3C93.1 96 0 189.1 0 304s93.1 208 208 208 208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 398.9c58.5-41.1 96-104.1 96-174.9C512 100.3 397.4 0 256 0S0 100.3 0 224c0 70.7 37.5 133.8 96 174.9V464c0 26.5 21.5 48 48 48h48v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h64v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c26.5 0 48-21.5 48-48v-65.1M96 256a64 64 0 1 1 128 0 64 64 0 1 1-128 0m256-64a64 64 0 1 1 0 128 64 64 0 1 1 0-128"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M320 0c17.7 0 32 14.3 32 32v64h120c39.8 0 72 32.2 72 72v272c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72h120V32c0-17.7 14.3-32 32-32M208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16zM264 256a40 40 0 1 0-80 0 40 40 0 1 0 80 0m152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80M48 224h16v192H48c-26.5 0-48-21.5-48-48v-96c0-26.5 21.5-48 48-48m544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48h-16V224z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M288 0H128c-17.7 0-32 14.3-32 32s14.3 32 32 32v132.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6 0 480.9 31.1 512 69.4 512h309.2c38.3 0 69.4-31.1 69.4-69.4 0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32S337.7 0 320 0zm-96 196.8V64h64v132.8c0 23.7 6.6 46.9 19 67.1l34.5 56.1h-171l34.5-56.1c12.4-20.2 19-43.4 19-67.1"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V216m256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64V216"/></svg>');}</style>
+
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-12 6 6-6-6-6-1.4 1.4 4.6 4.6-4.6 4.6z"/></svg>');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/counter.css">
+    
+      <link rel="stylesheet" href="../../css/background.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ble-系统学习" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="bblog" class="md-header__button md-logo" aria-label="bblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.73 12.01a8.07 8.07 0 0 1-3.274 2.421c.828 1.02 1.246 2.156.945 3.337-.288 1.128-1.366 2.228-2.9 2.228H6.5v-5.999h7c3.86 0 7-3.14 7-6.998S17.36 0 13.5 0h-11v8.998h4V3.999h7c1.655 0 3 1.345 3 3s-1.345 2.999-3 2.999h-11V24h12c3.86 0 7-3.14 7-6.998 0-1.712-.481-3.634-1.77-4.992"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bblog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BLE学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/24849748/techNote" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    24849748/techNote
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../code/c%E8%AF%AD%E8%A8%80%E9%9B%B6%E9%95%BF%E6%95%B0%E7%BB%84%E7%90%86%E8%A7%A3/" class="md-tabs__link">
+          
+  
+  编程语言
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mcu/spi/" class="md-tabs__link">
+          
+  
+  单片机
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../BLE%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="md-tabs__link">
+          
+  
+  ble
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../linux/D1-%E8%BF%9B%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../git/Git%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-tabs__link">
+          
+  
+  应用笔记
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bblog" class="md-nav__button md-logo" aria-label="bblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.73 12.01a8.07 8.07 0 0 1-3.274 2.421c.828 1.02 1.246 2.156.945 3.337-.288 1.128-1.366 2.228-2.9 2.228H6.5v-5.999h7c3.86 0 7-3.14 7-6.998S17.36 0 13.5 0h-11v8.998h4V3.999h7c1.655 0 3 1.345 3 3s-1.345 2.999-3 2.999h-11V24h12c3.86 0 7-3.14 7-6.998 0-1.712-.481-3.634-1.77-4.992"/></svg>
+
+    </a>
+    bblog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/24849748/techNote" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    24849748/techNote
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    编程语言
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            编程语言
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    C
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            C
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/c%E8%AF%AD%E8%A8%80%E9%9B%B6%E9%95%BF%E6%95%B0%E7%BB%84%E7%90%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    零长数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/c%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    内存空间分布
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    学习笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    单片机
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            单片机
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    外设
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            外设
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcu/spi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/Cortex-M%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cortex-M内核学习
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ble
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ble
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BLE%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基础概念
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/D1-%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    进程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    应用笔记
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            应用笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    git
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            git
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/Git%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基础操作
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/Git%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#各种角色对应关系" class="md-nav__link">
+    <span class="md-ellipsis">
+      各种角色对应关系
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#协议栈" class="md-nav__link">
+    <span class="md-ellipsis">
+      协议栈
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#蓝牙配对与绑定" class="md-nav__link">
+    <span class="md-ellipsis">
+      蓝牙配对与绑定
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="蓝牙配对与绑定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#配对过程总体框图" class="md-nav__link">
+    <span class="md-ellipsis">
+      配对过程总体框图
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llcp经典蓝牙中略" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLCP（经典蓝牙中，略）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l2cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      L2CAP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#蓝牙状态机" class="md-nav__link">
+    <span class="md-ellipsis">
+      蓝牙状态机
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="蓝牙状态机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基本概念理解" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本概念理解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#资料汇总" class="md-nav__link">
+    <span class="md-ellipsis">
+      资料汇总
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#蓝牙-ota" class="md-nav__link">
+    <span class="md-ellipsis">
+      蓝牙 OTA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ble-术语" class="md-nav__link">
+    <span class="md-ellipsis">
+      BLE 术语
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ble-蓝牙协议gatt-与-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      BLE 蓝牙协议：GATT 与 GAP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLE 蓝牙协议：GATT 与 GAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gapgeneric-access-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      GAP(Generic Access Profile)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gattgeneric-attribute-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      GATT（Generic Attribute Profile）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GATT（Generic Attribute Profile）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gatt-通讯事务" class="md-nav__link">
+    <span class="md-ellipsis">
+      GATT 通讯事务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gatt-结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      GATT 结构
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">BLE</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">低功耗蓝牙</span>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="ble-系统学习">BLE 系统学习<a class="headerlink" href="#ble-系统学习">&para;</a></h1>
+<blockquote>
+<p><a href="https://www.bluetooth.com/zh-cn/specifications/specs/">蓝牙官网资料</a>
+<a href="https://developers.goodix.com/zh/bbs/blog_detail/c12a1e1d68fc4c7893b11cab69851378">蓝牙连接参数更新</a>
+<a href="https://blog.csdn.net/zhoutaopower/category_9083143.html">CSDN 专栏</a></p>
+</blockquote>
+<h4 id="各种角色对应关系">各种角色对应关系<a class="headerlink" href="#各种角色对应关系">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>遥控器</th>
+<th>机顶盒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gatt server</td>
+<td>gatt client</td>
+</tr>
+<tr>
+<td>外围设备</td>
+<td>中央设备</td>
+</tr>
+<tr>
+<td>从机</td>
+<td>主机</td>
+</tr>
+</tbody>
+</table>
+<h2 id="协议栈">协议栈<a class="headerlink" href="#协议栈">&para;</a></h2>
+<p><strong>架构</strong>
+<img alt="ble协议栈架构" src="https://cdn.jsdelivr.net/gh/24849748/PicBed/ob/ble协议栈架构.png" /></p>
+<ul>
+<li>Applications</li>
+<li>HOST</li>
+<li>GAP(Generic access profile)</li>
+<li>GATT</li>
+<li>ATT</li>
+<li>SM(Security Manager)</li>
+<li>L2CAP(Logical Link Control Adaptation Protocol)</li>
+<li>Controller</li>
+<li>Link Layer(LL)</li>
+<li>Physical Layer</li>
+</ul>
+<h2 id="蓝牙配对与绑定">蓝牙配对与绑定<a class="headerlink" href="#蓝牙配对与绑定">&para;</a></h2>
+<h4 id="配对过程总体框图">配对过程总体框图<a class="headerlink" href="#配对过程总体框图">&para;</a></h4>
+<p><img alt="配对过程总体框图" src="https://developers.goodix.com/zh/upload/0.44620318183677243.png" />
+总体分为三个阶段：
+1. 特性交换
+2. 密钥交换 (STK/LTK)
+3. 密钥分发 distribution</p>
+<p>配对 (Paring) 和绑定 (bonding) 是实现蓝牙通讯安全的一种机制，有两个点：
+1. paring/bonding 实现的是蓝牙链路层的安全，对应用完全透明。（不需要应用对数据做特殊处理）
+2. 实现安全有两种选择：加密 encrypt/签名 signature，大多应用选择加密。用户也可以在应用上实现相同功能，只不过自己实现的话涉及很多技术，密码算法、密钥生成、密钥交换等，所以专业的事交给专业的人做得了。
+paring/bonding 把上述的过程标准化放在蓝牙协议栈里，使得用户可以"无感"使用蓝牙安全通信。</p>
+<p>paring/bonding 是蓝牙 SM（security manager）里的一部分，SM 定义了蓝牙通讯的安全框架，里面涉及安全架构、密码工具箱、paring 协议等。paring 协议比较关键，所以常把 SM 和 paring 等价。</p>
+<h4 id="llcp经典蓝牙中略">LLCP（经典蓝牙中，略）<a class="headerlink" href="#llcp经典蓝牙中略">&para;</a></h4>
+<p>LLCP（链路层控制程序）
+* Master 需要更新时，可向 Slave 发送连接参数更新请求<strong> LL_CONNECTION_PARAM_REQ</strong>，也可以最直接通知 Slave 更新 <strong>LL_CONNECTION_UPDATE_IND</strong> 而不需要协商
+* Slave 需要更新时，需要向主设备发送连接参数更新请求<strong> LL_CONNECTION_PARAM_REQ</strong></p>
+<p>无论 Master 发起还是 Slave 发起，都只能由 Master 发起连接参数更新通知来应用新的连接参数</p>
+<p>LLCP 更新流程
+Slave 发起流程
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph 
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    Slave -- LL_CONNECTION_PARAM_REQ --&gt; Master
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    Slave --&gt; Master
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    Master -- LL_CONNECTION_UNKNOWN_RSP --&gt; Slave
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    %% Slave-&gt;&gt;Master: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    %% Master-&gt;&gt;Slave: LL_UNKNOWN_RSP
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    %% Slave-&gt;&gt;Master: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    %% Master-&gt;&gt;Slave: LL_REJECT_EXT_IND
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    %% Slave-&gt;&gt;Master: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    %% Master-&gt;&gt;Slave: LL_CONNECTION_UPDATE_IND
+</span></code></pre></div></p>
+<p>Master 发起更新请求
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sequenceDiagram
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    Slave-&gt;&gt;Master: LL_UNKNOWN_RSP
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    Slave-&gt;&gt;Master: LL_REJECT_EXT_IND
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_PARAM_REQ
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    Slave-&gt;&gt;Master: LL_CONNECTION_PARAM_RSP
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_UPDATE_IND
+</span></code></pre></div></p>
+<ul>
+<li>
+<p>如果接收方不能解析 LL_CONNECTION_PARAM_REQ，则回复 LL_UNKNOWN_RSP，双方继续使用之前的连接参数交互</p>
+</li>
+<li>
+<p>LL_CONNECTION_PARAM_REQ(0x0F)</p>
+</li>
+<li>LL_CONNECTION_PARAM_RSP(0x10)</li>
+<li>PDU 和 LL_CONNECTION_PARAM_REQ 一样</li>
+</ul>
+<h4 id="l2cap">L2CAP<a class="headerlink" href="#l2cap">&para;</a></h4>
+<p>Master 需要更新时，直接发送 LL_CONNECTION_UPDATE_IND
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sequenceDiagram
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_UPDATE_IND
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    Note over Master,Slave: 应用新的连接参数
+</span></code></pre></div>
+Slave 需要更新时，需要发送更新请求 (Connection Parameter Update Request)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sequenceDiagram
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    Slave-&gt;&gt;Master: L2CAP 连接参数更新请求 (0x12)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    Master-&gt;&gt;Slave: L2CAP 连接参数更新响应 (0x13)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    Master-&gt;&gt;Slave: LL_CONNECTION_UPDATE_IND(0x00)
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    Note over Master,Slave: 应用新的连接参数
+</span></code></pre></div>
+说明：
+* 0x12：只能由 Slave 发送给 Master，PDU 包括 Interval Min，Interval Max，Latency，Timeout
+* 0x13：无论是否接受该请求，都需要回应，0 表示接收，1 表示拒绝
+* 0x00：若 Slave 支持 PDU 中的连接参数，则应用；若不支持，则断开连接
+* </p>
+<h2 id="蓝牙状态机">蓝牙状态机<a class="headerlink" href="#蓝牙状态机">&para;</a></h2>
+<p>蓝牙链路层的状态机有 5 种状态
+* 就绪态
+* 广播态
+* 链接态
+* 扫描态
+* 发起链接态
+<img alt="蓝牙各状态转换路径" src="https://i0.hdslb.com/bfs/article/c8991a7597895b1f401556a461e797f8f5bfe4b0.png@!web-article-pic.avif" />
+<img alt="蓝牙各状态转换路径" src="https://img-blog.csdnimg.cn/20190703224754826.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pob3V0YW9wb3dlcg==,size_16,color_FFFFFF,t_70" /></p>
+<ul>
+<li>设备上电时处于就绪态</li>
+</ul>
+<h3 id="基本概念理解">基本概念理解<a class="headerlink" href="#基本概念理解">&para;</a></h3>
+<ul>
+<li><strong>Paring</strong></li>
+<li><strong>Bonding</strong></li>
+<li><strong>SM（security manager）</strong>：蓝牙协议栈的安全管理层，规定了跟蓝牙安全通信有关的所有要素，包括 paring，bonding，以及下文提到的 SMP。</li>
+<li><strong>SMP（security manager protocol）</strong></li>
+<li><strong>OOB</strong></li>
+<li><strong>Passkey/pin 码</strong></li>
+<li><strong>Numeric comparison</strong></li>
+<li><strong>MITM（man in the middle）</strong>："第三者"，比如 AB 在安全通信，C 伪装 A 或 B 插入进来。如果对安全性比较高，就需要具备 MITM 保护能力。在 SM 中 MITM 保护是通过认证（authentication）来实现的，SM 中实现认证的三种方式：OOB,psskey,numeric comparison。</li>
+<li><strong>LESC（LE secure connections）</strong>，也叫 SC</li>
+<li><strong>Legacy paring</strong>，在 LESC 引入之前的密钥生成方式，称为 legacy paring，换句话说，legacy paring 是相对 LESC 来说的，不支持 LESC 的配对即为 legacy paring（legacy 配对）。</li>
+<li><strong>TK（Temporary Key，临时密钥）</strong></li>
+<li><strong>STK（short term key，短期密钥）</strong></li>
+<li><strong>LTK（long term key，长期密钥）</strong></li>
+<li><strong>IRK（Identity Resolving Key，蓝牙设备地址解析密钥）</strong>：</li>
+<li><strong>Identity Address（设备唯一地址）</strong></li>
+<li><strong>IO capabilities（输入输出能力）</strong></li>
+<li><strong>Key size（密钥长度）</strong></li>
+</ul>
+<p>https://www.cnblogs.com/iini/p/12801242.html</p>
+<h2 id="资料汇总">资料汇总<a class="headerlink" href="#资料汇总">&para;</a></h2>
+<blockquote>
+<p><a href="https://www.52bluetooth.com/">52BlueTooth</a>
+<a href="https://www.52bluetooth.com/forum.php?mod=viewthread&amp;tid=68299&amp;extra=page%3D1">一分钟读懂低功耗蓝牙连接数据包</a>
+<a href="https://www.52bluetooth.com/portal.php?mod=list&amp;catid=16">52BlueTooth 蓝牙协议栈教程</a>
+</p>
+</blockquote>
+<hr />
+<p>TAG: 刚接触蓝牙的学习</p>
+<h2 id="蓝牙-ota">蓝牙 OTA<a class="headerlink" href="#蓝牙-ota">&para;</a></h2>
+<p>OTA Server
+1. SOC mode：system on chip，程序烧录在 flash 里
+2. NCP mode：network coprocessor，不能独立工作，需要外部主机来完成工作</p>
+<p>OTA Client
+ble 中 client 通常指主设备</p>
+<h2 id="ble-术语">BLE 术语<a class="headerlink" href="#ble-术语">&para;</a></h2>
+<ul>
+<li><strong>通用属性配置文件 (GATT)</strong> — GATT 配置文件是一种通用规范，内容针对在 BLE 链路上发送和接收称为“属性”的简短数据片段。目前所有低功耗应用配置文件均以 GATT 为基础。<ul>
+<li>蓝牙特别兴趣小组 (Bluetooth SIG) 为低功耗设备定义诸多 <a href="https://www.bluetooth.org/en-us/specification/adopted-specifications">配置文件</a>。配置文件是描述设备如何在特定应用中工作的规范。请注意，一台设备可以实现多个配置文件。例如，一台设备可能包含心率监测仪和电池电量检测器。</li>
+</ul>
+</li>
+<li><strong>属性协议 (ATT)</strong> — 属性协议 (ATT) 是 GATT 的构建基础，二者的关系也被称为 GATT/ATT。ATT 经过优化，可在 BLE 设备上运行。为此，该协议尽可能少地使用字节。每个属性均由通用唯一标识符 (UUID) 进行唯一标识，后者是用于对信息进行唯一标识的字符串 ID 的 128 位标准化格式。由 ATT 传输的_属性_采用_特征_和_服务_格式。</li>
+<li><strong>特征</strong> — 特征包含一个值和 0 至多个描述特征值的描述符。您可将特征理解为类型，后者与类类似。 </li>
+<li><strong>描述符</strong> — 描述符是描述特征值的已定义属性。例如，描述符可指定人类可读的描述、特征值的可接受范围或特定于特征值的度量单位。</li>
+<li>
+<p><strong>Service</strong> — 服务是一系列特征。例如，您可能拥有名为“心率监测器”的服务，其中包括“心率测量”等特征。您可以在 <a href="https://www.bluetooth.org/en-us/specification/adopted-specifications">bluetooth.org</a> 上找到基于 GATT 的现有配置文件和服务的列表。</p>
+</li>
+<li>
+<p>中央与外围。这适用于 BLE 连接本身。担任中央角色的设备进行扫描、寻找广播；外围设备发出广播。</p>
+</li>
+<li>GATT 服务器与 GATT 客户端。这确定两个设备建立连接后如何相互通信。</li>
+</ul>
+<p>通常，client 客户端指的是主设备，比如手机电脑等，service 服务端指的才是手表等</p>
+<h2 id="ble-蓝牙协议gatt-与-gap">BLE 蓝牙协议：GATT 与 GAP<a class="headerlink" href="#ble-蓝牙协议gatt-与-gap">&para;</a></h2>
+<h3 id="gapgeneric-access-profile">GAP(Generic Access Profile)<a class="headerlink" href="#gapgeneric-access-profile">&para;</a></h3>
+<p>用来控制设备连接和广播。GAP 使你的设备被其他设备可见，并决定了你的设备是否可以或者怎样与合同设备进行交互。例如 Beacon 设备就只是向外广播，不支持连接，小米手环就等设备就可以与中心设备连接。</p>
+<p>GAP 给设备定义了若干角色，两个主要的分为：
+1. 外围设备（Peripheral）：小或简单的设备，比如传感器
+2. 中心设备（Central）：相对比较强大的设备，比如手机</p>
+<p>在 GAP 中外围设备通过两种方式向外<strong>广播数据</strong>，每种数据最长可以包含 31 byte： 
+1. Advertising Data Payload（广播数据）
+2. Scan Response Data Payload（扫描回复）</p>
+<p>这里广播数据是必需的，因为外设必需不停的向外广播，让中心设备知道它的存在。扫描回复是可选的，中心设备可以向外设请求扫描回复，这里包含一些设备额外的信息，例如设备的名字。</p>
+<p>大部分情况下，外设通过广播自己来让中心设备发现自己，并建立 GATT 连接，从而进行更多的数据交换。
+也有些情况是不需要连接的，只要外设广播自己的数据即可。用这种方式主要目的是让外围设备，把自己的信息发送给多个中心设备。
+因为基于 GATT 连接的方式的，只能是一个外设连接一个中心设备。使用广播这种方式最典型的应用就是苹果的 iBeacon。广播工作模式下的网络拓扑图如下：</p>
+<p><img alt="" src="https://img2018.cnblogs.com/blog/653161/201909/653161-20190911171703110-1624698386.png" /></p>
+<h3 id="gattgeneric-attribute-profile">GATT（Generic Attribute Profile）<a class="headerlink" href="#gattgeneric-attribute-profile">&para;</a></h3>
+<p>GATT 定义两个 BLE 设备通过叫做 Service 和 Characteristic 的东西进行通信。GATT 就是使用了 ATT（Attribute Protocol）协议，ATT 协议把 Service, Characteristic 遗迹对应的数据保存在一个查找表中，次查找表使用 16 bit ID 作为每一项的索引。</p>
+<p>一旦两个设备建立起了连接，GATT 就开始起作用了，这也意味着，你必需完成前面的 GAP 协议。这里需要说明的是，GATT 连接，必需先经过 GAP 协议。实际上，在 Android 开发中，可以直接使用设备的 MAC 地址，发起连接，可以不经过扫描的步骤。这并不意味不需要经过 GAP，实际上在芯片级别已经给你做好了，蓝牙芯片发起连接，总是先扫描设备，扫描到了才会发起连接。</p>
+<p>GATT 连接需要特别注意的是：<strong>GATT 连接是独占的</strong>。也就是一个 BLE 外设同时只能被一个中心设备连接。一旦外设被连接，它就会马上停止广播，这样它就对其他设备不可见了。当设备断开，它又开始广播。</p>
+<p>中心设备和外设需要双向通信的话，唯一的方式就是建立 GATT 连接。</p>
+<p>GATT 的连接网络拓扑结构。这里很清楚的显示，一个外设只能连接一个中心设备，而一个中心设备可以连接多个外设。</p>
+<p><img alt="" src="https://img2018.cnblogs.com/blog/653161/201909/653161-20190911171900900-753886163.png" /></p>
+<p>一旦建立了连接，通信就是双向的了，对比前面的 GAP 广播的网络塔扑，GAP 通信是单向的。如果你要<strong>让两个外围设备能通信，就只能通过中心设备中转</strong>。</p>
+<h4 id="gatt-通讯事务">GATT 通讯事务<a class="headerlink" href="#gatt-通讯事务">&para;</a></h4>
+<p>GATT 通信的双方是 C/S 关系
+外设作为 GATT 服务端（Server），它维持了 ATT 的查找表以及 service 和 characteristic 的定义。
+中心设备是 GATT 客户端（Client），他向 Server 发起请求。
+需要注意的是，所有的通信事件，都是由客户端（也叫主设备，Master）发起，并且接收服务端（也叫从设备，Slaver）的响应。</p>
+<p>下图展示一个外设（GATT 服务端）和中心设备（GATT 客户端）之间的数据交流流程，可以看到的是，每次都是主设备发起请求：</p>
+<p><img alt="" src="https://img2018.cnblogs.com/blog/653161/201909/653161-20190911172057195-231652040.png" /></p>
+<h4 id="gatt-结构">GATT 结构<a class="headerlink" href="#gatt-结构">&para;</a></h4>
+<p>GATT 事务是建立在嵌套的 Profiles，Services 和 Characteristics 之上的，如下如所示：</p>
+<p><img alt="|179" src="https://img2018.cnblogs.com/blog/653161/201909/653161-20190911172150083-441623606.png" /></p>
+<ul>
+<li><strong>Profile</strong> Profile 并不是实际存在于 BLE 外设上的，它只是一个被 Bluetooth SIG 或者外设设计者预先定义的 Service 的集合。例如心率 Profile（Heart Rate Profile）就是结合了 Heart Rate Service 和 Device Information Sercvice。所有官方通过 GATT Profile 的列表可以从这里找到。</li>
+<li><strong>Service</strong> Service 是把数据分成一个个的独立逻辑项，它包含一个或者多个 Characteristic。每个 Service 有一个 UUID 唯一标识。UUID 有 16bit 的，或者 128bit 的。16bit 的 UUID 是官方通过认证的，需要花钱购买，128bit 是自定义的，这个就可以自己随便设置。</li>
+<li><strong>Characteristic</strong> 在 GATT 事务中的最低界别的是 Characteristic，Characteristic 是最小的逻辑数据单元，当然它可能包含一个组关联的数据，例如加速度计的 X/Y/Z 三轴值。与 Service 类似，每个 Characteristic 用 16bit 或者 128bit 的 UUID 唯一标识。你可以免费使用 Bluetooth SIG 官方定义的标准 Characteristic，使用官方定义的，可以确保 BLE 的软件和硬件能相互理解。当然，你可以自定义 Characteristic，这样的话，就只有你自己的软件和外设能够相互理解。</li>
+<li>实际上，和 BLE 外设打交道，主要是通过 Characteristic。你可以从 Characteristic 读取数据，也可以往 Characteristic 写数据。这样就实现了双向的通信。所以你可以自己实现一个类似串口（UART）的 service，这个 Service 中包含两个 Characteristic，一个被配置只读的通道（RX），另一个配置为只写的通道（TX）。</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 by bosco.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.tooltips", "content.code.annotate", "content.code.copy", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.path", "search.suggest", "search.highlight", "search.share", "header.autohide", "toc.follow"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="../../js/click-colorful.js"></script>
+      
+    
+  </body>
+</html>
