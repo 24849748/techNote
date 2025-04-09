@@ -148,6 +148,32 @@ git show <tag> # 查看标签节点具体信息
 
 ### rebase
 
+### cherry-pick
+
+```
+A->B->C main
+ \
+  ->D->E->F dev
+```
+
+需要将另一条分支某个 commit 复制到当前分支的情况
+
+```bash
+git cherry-pick <commitF> # 复制某个 commit 到当前分支
+git cherry-pick <commitF> <commitE> # 复制多个 commit 到当前分支
+git cherry-pick <commitF>^..<commitD> # 复制某个 commit 到当前分支
+```
+
+当然 commit hash 是不一样的
+
+发生代码冲突时，cherry-pick 会停下来，让用户决定如何继续操作。
+
+```bash
+git cherry-pick --continue # 解决冲突，git add 后继续执行
+git cherry-pick --abort # 放弃，回到 cherry-pick 之前的状态
+git cherry-pick --quit # 退出，回到 cherry-pick 之前的状态，但不会影响已经 cherry-pick 的 commit
+```
+
 ### reset
 
 `git reset` 操作会丢失 commit 信息，因此建议使用 `git revert` 替代。通常我会在以下场景使用到：
