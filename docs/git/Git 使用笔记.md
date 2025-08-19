@@ -26,6 +26,19 @@ date: 2024-04-27 23:55:32
         helper = store
 ```
 
+### 一次 revert 多个提交
+
+将最新5个提交进行 revert，不自动生成新的 commit
+```bash
+git revert -n HEAD~5..HEAD
+```
+
+### 一次整理分支历史提交的记录
+
+```bash
+git rebase -i HEAD~5
+```
+
 ### git 指定仓库初始化分支
 
 ```shell
