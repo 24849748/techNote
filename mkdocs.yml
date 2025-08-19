@@ -5,6 +5,7 @@ nav:
     - C:
       - 零长数组: code/c语言零长数组理解.md
       - 内存空间分布: code/c语言内存空间分布.md
+      - likely()和unlikely()宏: code/c语言likely()和unlikely()宏.md
     - Python:
       - 学习笔记: code/Python学习笔记.md
   - 单片机:
